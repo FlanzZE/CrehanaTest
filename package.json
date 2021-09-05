@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.10",
+    "@chakra-ui/react": "^1.6.7",
+    "@emotion/react": "11",
+    "@emotion/styled": "11",
     "currency-symbol-map": "^5.0.1",
+    "framer-motion": "4",
     "graphql": "^15.5.2",
     "next": "11.1.2",
     "react": "17.0.2",
@@ -18,6 +22,7 @@
   },
   "devDependencies": {
     "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2"
+    "eslint-config-next": "11.1.2",
+    "jest": "^27.1.0"
   }
 }
