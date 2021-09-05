@@ -3,31 +3,61 @@ import { requestGQL } from '../../gql/client';
 import { getCountryByCode } from '../../gql/queries/countryQuerys';
 import getSymbolFromCurrency from 'currency-symbol-map'
 function getLangs(langs) {
-  console.log('====================================');
-  console.log(langs.map(lang => lang.name).join(", "));
-  console.log('====================================');
   return langs.map(lang => lang.name).join(", ")
 }
-
+import {
+  Box, Table,
+  Thead,
+  Td, Tr, Th, Tbody,
+  Heading,
+  Flex,
+} from '@chakra-ui/react';
 const Country = ({ country, code }) => {
-  console.log(country);
   return (
-    <div>
+    <Flex flexDir="column" alignItems="center" justifyContent="center">
+      <Heading as="h1">Detalle de pais:</Heading>
       {
         country
           ?
-          <div>
-            <h1 style={{ textAlign: "center" }} > {country.name}, {country.capital} </h1>
-            <p>Phone: {country.phone ? country.phone : "No Phone"} </p>
-            <p>Code: {country.code} </p>
-            <p>Currency: {`${country.currency} (${getSymbolFromCurrency(country.currency)})`} </p>
-            <p>Languages: {country.languages ? getLangs(country.languages) : "No Langs"} </p>
-            <p>Continent: {country.continent ? country.continent.name : "No Continent"} </p>
-            <p>Phone: {country.phone ? country.phone : "No Phone"} </p>
-          </div>
+          <Box>
+            <Table variant="striped" colorScheme="purple">
+              <Thead>
+                <Tr>
+                  <Th isNumeric><Heading>{country.name}</Heading></Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                <Tr>
+                  <Th>Capital:</Th>
+                  <Th>{country.capital ? country.capital : "No Capital"}</Th>
+
+                </Tr>
+                <Tr>
+                  <Td>Phone:</Td>
+                  <Td>{country.phone ? country.phone : "No Phone"}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Code:</Td>
+                  <Td>{country.code}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Currency</Td>
+                  <Td>{`${country.currency} (${getSymbolFromCurrency(country.currency)})`}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Languages:</Td>
+                  <Td>{country.languages ? getLangs(country.languages) : "No Langs"}</Td>
+                </Tr>
+                <Tr>
+                  <Td>Continent:</Td>
+                  <Td>{country.continent ? country.continent.name : "No Continent"}</Td>
+                </Tr>
+              </Tbody>
+            </Table>
+          </Box>
           : <p>No se encontro resultado con el codigo {code} </p>
       }
-    </div>
+    </Flex>
   )
 }
 

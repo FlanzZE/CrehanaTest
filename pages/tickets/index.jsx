@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-
+import {
+  Stack,
+  Badge, Textarea,
+  Heading,
+  Flex,
+} from '@chakra-ui/react';
 export const Index = () => {
   const [tickets, settickets] = useState("25,25,50");
   const hasChange = bills => {
@@ -24,11 +29,11 @@ export const Index = () => {
     return false
   };
   return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Tickets</h1>
+    <Flex flexDir="column" style={{ padding: "1rem" }}>
+      <Heading>Tickets</Heading>
 
-      <h2>Ingresa el orden de los billetes separados por comas</h2>
-      <textarea
+      <Heading as="h2" >Ingresa el orden de los billetes separados por comas</Heading>
+      <Textarea
         value={tickets}
         name="Tickets"
         id="1"
@@ -40,8 +45,16 @@ export const Index = () => {
             settickets(value.replace(/\s/g, ''))
           }
         } />
-      <h2> {hasChange(tickets) ? "Aun " : "No"} hay cambio </h2>
-    </div>
+      <Stack direction="row">
+        <Badge
+          id="result"
+          variant={hasChange(tickets) ? "solid" : "subtle"}
+          colorScheme={hasChange(tickets) ? "green" : "red"}>
+          {hasChange(tickets) ? "Hay cambio" : "No hay cambio"}
+        </Badge>
+      </Stack>
+
+    </Flex>
   )
 }
 export default Index
